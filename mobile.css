@@ -3,17 +3,21 @@ h1, h3, h4 {
 }
 
 body {
-	background-color: #E8E8E8; 
+	background-color: #F0F0F0; 
 	font-family: calibri; 	
 }
 
+h3 {
+	font-family: capitals; 
+	font-size: small; 
+}
 h2, h4 {
 	font-style: italic; 
 }
 
 p.pheader {
 	margin-bottom: 0; 
-	font-weight: bold; 
+	font-weight: bold;  
 }
 
 ul {

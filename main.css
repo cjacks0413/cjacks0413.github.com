@@ -1,13 +1,25 @@
-body {
-	background-color: #F0F0F0; 
-	font-family: calibri; 
+h1, h3, h4 {
+	text-align: center; 
 }
 
-h1, {
-	text-align: center; 
+body {
+	background-color: #F8F8F8; 
+	font-family: calibri; 	
+}
+
+h3 {
+	font-family: capitals; 
+	font-size: medium; 
+}
+h2, h4 {
+	font-style: italic; 
+}
+
+p.pheader {
+	margin-bottom: 0; 
+	font-weight: bold;  
 }
 
 ul {
 	left: 30%; 
 }
-
