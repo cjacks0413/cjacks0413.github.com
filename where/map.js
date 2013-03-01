@@ -41,15 +41,15 @@ function init() {
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
 	getMyLocation();
 	var meMarker = new google.maps.Marker({
-	position: center,
+	position: myLat, myLng,
 	map: map,
 	title: "You are here!" 
 	}); 
 	meMarker.setMap(map); 
-	
+	content = meMarker.title + ": " + myLat + myLng; 
 	var infowindow = new google.maps.InfoWindow(); 	
-    google.maps.event.addListener(meMarker, 'click', function() {
-    infowindow.setContent(meMarker.title), 
+    google.maps.event.addListener(meMarker, 'idle', function() {
+    infowindow.setContent(content), 
 	infowindow.open(map,meMarker)
 	}); 
 	renderMap(); 
