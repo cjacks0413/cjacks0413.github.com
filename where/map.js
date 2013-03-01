@@ -52,7 +52,7 @@ function init() {
 	title: "You are here" 
 	}); 
 	meMarker.setMap(map); 
-	content = meMarker.title + ": " + myLat + myLng;
+	content = meMarker.title + ": " + myLat + ", " + myLng;
 	var infowindow = new google.maps.InfoWindow(); 	
     google.maps.event.addListener(meMarker, 'click', function() {
     infowindow.setContent(content), 
