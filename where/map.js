@@ -44,8 +44,10 @@ function init() {
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
 	getMyLocation();
 	console.log("int init"); 
+	
+	me = new google.maps.LatLng(myLat, myLng); 
 	var meMarker = new google.maps.Marker({
-	position: myLat, myLng;
+	position: me, 
 	map: map,
 	title: "You are here!" 
 	}); 
