@@ -45,7 +45,7 @@ function init() {
 	getMyLocation();
 	console.log("int init"); 
 	var meMarker = new google.maps.Marker({
-	position: myLat, myLng,
+	position: myLat, myLng;
 	map: map,
 	title: "You are here!" 
 	}); 
