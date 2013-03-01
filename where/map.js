@@ -73,7 +73,7 @@ function renderMap()
 {
 	curLocation = new google.maps.LatLng(myLat, myLng);
 //	parse_stops();
-	map.panTo(center);
+	map.panTo(me);
 	renderRedLine();
 	findCarmenAndWaldo();
 }
