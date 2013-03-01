@@ -49,13 +49,12 @@ function init() {
 	var meMarker = new google.maps.Marker({
 	position: me, 
 	map: map,
-	title: "You are here!" 
+	title: "You are here" 
 	}); 
 	meMarker.setMap(map); 
 	content = meMarker.title + ": " + myLat + myLng;
-	console.log(content);  
 	var infowindow = new google.maps.InfoWindow(); 	
-    google.maps.event.addListener(meMarker, 'idle', function() {
+    google.maps.event.addListener(meMarker, 'click', function() {
     infowindow.setContent(content), 
 	infowindow.open(map,meMarker)
 	}); 
