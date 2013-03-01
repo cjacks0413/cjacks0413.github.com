@@ -19,9 +19,12 @@ var WaldoLng = -71.121824;
 function getMyLocation()
 {
 	if(navigator.geolocation) {
+			console.log("in navigator"); 
 			navigator.geolocation.getCurrentPosition(function(position) {
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
+			console.log(myLat);
+			console.log(myLng); 
 	}); }
 	else {
 		alert("Sorry, HTML5 geolocation is not supported on your browser.");
@@ -40,6 +43,7 @@ center = new google.maps.LatLng(42.330678, -71.06678);
 function init() {
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
 	getMyLocation();
+	console.log("int init"); 
 	var meMarker = new google.maps.Marker({
 	position: myLat, myLng,
 	map: map,
