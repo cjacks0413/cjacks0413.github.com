@@ -52,11 +52,16 @@ function init() {
 	
 	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
 	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
-	distR = findClosestStop(); 
+//	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
 	content += " You are " + distW + " kilometers from Waldo "; 
 	content += "and " + distC + " kilometers from Carmen! "; 
+/*	if(distR >= 5) {
+		content += "No Red Lines stops within 5 kilometers, sorry!";
+	}
+	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
+	+ distR.closest + " kilometers away."; */
 	//set up info window
 	var infowindow = new google.maps.InfoWindow(); 	
     google.maps.event.addListener(meMarker, 'click', function() {
@@ -70,8 +75,6 @@ function findMyPosition()
 {
 	//geolocation, do check if supported on browser 
 	renderMap();
-	test = parse_stops();
-	console.log(test); 
 }
 
 function renderMap() 
@@ -97,10 +100,7 @@ function callback()
 		stops = JSON.parse(str);
 	}
 }*/ 
-function findClosestStop()
-{
-	
-}
+
 function findCarmenAndWaldo()
 {
 	var waldo = {
@@ -119,9 +119,9 @@ function findCarmenAndWaldo()
 		scaledSize: new google.maps.Size(25,25)
 		};
 		
-/*	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
+	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
 	request2.send(null);
-	request2.onreadystatechange = callback2;*/ 
+	request2.onreadystatechange = callback2; 
 
 	Waldo = new google.maps.LatLng(WaldoLat, WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
@@ -187,7 +187,25 @@ function callback2()
 				CarmenLat = locations[2].longitude;
 		}
 	}
-}	*/
+}	*/ 
+function findClosestStop()
+{
+
+	var closest = 5;
+	var curr;  
+	var stationName; 
+	var allInfo = {closest: 5, stationName: ""}; 
+	for(i=0;i<redStations.length;i++){
+		curr = getDistanceFromPoint(myLat,myLng,markers[i].position.hb,markers[i].position.ib);
+		if(curr < closest) {
+			closest = curr;
+			stationName = markers[i].title;
+		} 
+	}
+	allInfo.closest = closest;
+	allInfo.stationName = stationName;
+	return allInfo; 
+}
 
 function renderRedLine()
 {
@@ -307,7 +325,6 @@ function renderRedLine()
 	markers.push(new google.maps.Marker ({position: braintree,title: "Braintree Station",
 	keyNorth: "", keySouth: "RBRAS", icon: image }));
 	
- 
 //polyline	
 redLine = new google.maps.Polyline({
 	path: redStations,
@@ -331,14 +348,13 @@ redBraintreeBranch = new google.maps.Polyline({
 	strokeWeight: 10,
 	});
 	redBraintreeBranch.setMap(map); 
-
 //markers 	
 for (var m in markers) {
 	markers[m].setMap(map);
 //	console.log(markers[m].title); 
-	for(i=0;i<markers.length;i++); {
-//	markers[i].setMap(map);
-//	console.log(markers[i].title); 
+//	for(i=0;i<markers.length;i++); {
+	//	markers[i].setMap(map);
+	//	console.log(markers[i].title); 
 	google.maps.event.addListener(markers[m], 'click', function() {
 			var content = this.title; 
 			object = this;
@@ -356,8 +372,8 @@ for (var m in markers) {
 			infowindow.open(map, object);
 			}); 
 		}
-	}
-	}
+//	}
+}
 
 
 function makeData(stops, m)
@@ -413,7 +429,6 @@ function makeData(stops, m)
 	}
 }
 		
-
 
 
 
