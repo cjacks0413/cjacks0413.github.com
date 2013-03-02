@@ -8,6 +8,7 @@ var redAshmont = [];
 var redBraintree = [];
 var markers = []; 
 
+var locations;
 var stops; 
 var infowindow = new google.maps.InfoWindow(); 
 
@@ -45,10 +46,18 @@ function init() {
 	var meMarker = new google.maps.Marker({
 	position: me, 
 	map: map,
-	title: "You are here" 
+	title: "You are here: " 
 	}); 
 	meMarker.setMap(map); 
-	content = meMarker.title + ": " + myLat + ", " + myLng;
+	
+	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
+	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
+	distR = findClosestStop(); 
+	//set up content
+	content = meMarker.title + myLat + ", " + myLng + "! ";
+	content += " You are " + distW + " kilometers from Waldo "; 
+	content += "and " + distC + " kilometers from Carmen! "; 
+	//set up info window
 	var infowindow = new google.maps.InfoWindow(); 	
     google.maps.event.addListener(meMarker, 'click', function() {
     infowindow.setContent(content), 
@@ -88,6 +97,10 @@ function callback()
 		stops = JSON.parse(str);
 	}
 }*/ 
+function findClosestStop()
+{
+	
+}
 function findCarmenAndWaldo()
 {
 	var waldo = {
@@ -106,10 +119,10 @@ function findCarmenAndWaldo()
 		scaledSize: new google.maps.Size(25,25)
 		};
 		
-	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
+/*	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
 	request2.send(null);
-	request2.onreadystatechange = callback2;
-	
+	request2.onreadystatechange = callback2;*/ 
+
 	Waldo = new google.maps.LatLng(WaldoLat, WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
 	WaldoMarker.setMap(map);
@@ -128,16 +141,53 @@ function findCarmenAndWaldo()
 		cInfo.open(map, CarmenMarker)
 		});
 }		
-	
+
+function getDistanceFromPoint(myLat, myLng, lat2, lng2)
+{
+	var R = 6371;
+	var dLat = deg2rad(lat2 - myLat);
+	var dLon = deg2rad(lng2 - myLng);
+	var a = 
+		Math.sin(dLat/2) * Math.sin(dLat/2) +
+		Math.cos(deg2rad(myLat)) * Math.cos(deg2rad(lat2)) *
+		Math.sin(dLon/2) * Math.sin(dLon/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	var distance = R * c;
+	return distance; 
+}	
 
 
+function deg2rad(deg) {
+	return deg * (Math.PI/180); 
+}
+/*
 function callback2()
 {
 	console.log(request.readyState); 
 	if(request.readyState == 4 && request.status == 200) {
-		console.log(request.responseText);
-	} 
-}
+		string = request.responseText;
+		locations = JSON.parse(string); 
+	}
+	
+	if(locations.length > 0) {
+		if(locations.length == 1) {
+			if(locations[1].name == "Carmen Sandiego") {
+				 CarmenLat = locations[1].latitude;
+				 CarmenLng = locations[1].longitude;
+				}
+			if(locations[1].name == "Waldo") {
+				 WaldoLat = locations[1].latitude;
+				 WaldoLng = locations[1].longitude;
+				 }
+		}
+		if(locations.length == 2) {
+				WaldoLat = locations[1].latitude; 
+				WaldoLng = locations[1].longitude; 
+				CarmenLat = locations[2].latitude;
+				CarmenLat = locations[2].longitude;
+		}
+	}
+}	*/
 
 function renderRedLine()
 {
@@ -320,18 +370,38 @@ function makeData(stops, m)
 		if(stops[i].Line == "Red") { 
 		console.log(stops[i].PlatformKey); 
 		console.log(m.title); 
-/*			if(stops[i].PlatformKey == m.keyNorth){
-			console.log(m.title); 
+			if(stops[i].PlatformKey == m.keyNorth){
+				row = document.createElement('tr'); 
+				cell = document.createElement('td'); 
+				content = document.createTextNode(stops[i].TimeRemaining); 
+				cell.appendChild(content); 
+				row.appendChild(cell);
+				dir = document.createElement('td');
+				content2 = document.createTextNode("NORTHBOUND"); 
+				dir.appendChild(content2);
+				cell.appendChild(content);
+				tableBody.appendChild(cell); 
+/*			console.log(m.title); 
 			console.log(stops[i].PlatformKey); 
 			console.log("Direction is NORTH");
-			console.log(stops[i].TimeRemaining);
+			console.log(stops[i].TimeRemaining);*/
 			}
 			if(stops[i].PlatformKey == m.keySouth){
-				console.log(m.title); 
+				row = document.createElement('tr'); 
+				cell = document.createElement('td'); 
+				content = document.createTextNode(stops[i].TimeRemaining); 
+				cell.appendChild(content); 
+				row.appendChild(cell);
+				dir = document.createElement('td');
+				content2 = document.createTextNode("SOUTHBOUND"); 
+				dir.appendChild(content2);
+				cell.appendChild(content);
+				tableBody.appendChild(cell); 
+/*				console.log(m.title); 
 				console.log(stops[i].PlatformKey); 
 				console.log("Direction is SOUTH");
-				console.log(stops[i].TimeRemaining); 
-			}*/
+				console.log(stops[i].TimeRemaining); */
+			}
 		//m will have the name
 		//keyOf, passed m.title
 		//if the key of m.title == to stops[i].plaformkey
