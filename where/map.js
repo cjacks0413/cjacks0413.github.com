@@ -19,12 +19,9 @@ var WaldoLng = -71.121824;
 function getMyLocation()
 {
 	if(navigator.geolocation) {
-			console.log("in navigator"); 
 			navigator.geolocation.getCurrentPosition(function(position) {
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
-			console.log(myLat);
-			console.log(myLng); 
 	}); }
 	else {
 		alert("Sorry, HTML5 geolocation is not supported on your browser.");
@@ -43,7 +40,6 @@ center = new google.maps.LatLng(42.330678, -71.06678);
 function init() {
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
 	getMyLocation();
-	console.log("int init"); 
 	
 	me = new google.maps.LatLng(myLat, myLng); 
 	var meMarker = new google.maps.Marker({
@@ -109,11 +105,11 @@ function findCarmenAndWaldo()
 		anchor: new google.maps.Point(17, 34),
 		scaledSize: new google.maps.Size(25,25)
 		};
-/*		
+		
 	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
 	request2.send(null);
 	request2.onreadystatechange = callback2;
-	*/ 
+	
 	Waldo = new google.maps.LatLng(WaldoLat, WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
 	WaldoMarker.setMap(map);
@@ -138,7 +134,9 @@ function findCarmenAndWaldo()
 function callback2()
 {
 	console.log(request.readyState); 
-
+	if(request.readyState == 4 && request.status == 200) {
+		console.log(request.responseText);
+	} 
 }
 
 function renderRedLine()
