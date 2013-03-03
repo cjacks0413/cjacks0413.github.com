@@ -61,13 +61,13 @@ function placeMe() {
 	}); 
 	meMarker.setMap(map); 
 	renderMap(); 
-
+	console.log(CarmenLat, CarmenLng, WaldoLat, WaldoLng); 
 	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
 	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
-/*	if(WaldoLat == 0 && CarmenLat == 0){
+	if(WaldoLat == 0 && CarmenLat == 0){
 		content += "Where's Waldo..? Can't find Carmen either...";
 	}
 	else if(CarmenLat == 0) {
@@ -88,7 +88,7 @@ function placeMe() {
 	content += "and " + distC + " miles from Carmen! ";
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
 	+ distR.closest + " miles away."; 
-//	}
+	}
 	//set up info window
 	var infowindow = new google.maps.InfoWindow(); 	
     google.maps.event.addListener(meMarker, 'click', function() {
