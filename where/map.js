@@ -77,7 +77,7 @@ function ShowDistances()
 		console.log(content); 
 	}
 	var info = new google.maps.InfoWindow();
-	var pos = new google.maps.LatLng(-42.4009, -71.1);
+	var pos = new google.maps.LatLng(42.4009, -71.1);
 /*	var mark = new google.maps.Marker ({
 		position: pos,
 		map: map
