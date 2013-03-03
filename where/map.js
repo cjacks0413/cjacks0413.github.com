@@ -55,35 +55,38 @@ function ShowDistances()
 {
 	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
 	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
+	
 	var content; 
-	if(WaldoLat == 0 && CarmenLat == 0){
+	if(distC > 30 && distC > 30){
 		content = "Where's Waldo..? Can't find Carmen either...";
 		console.log(content);
 	}
-	else if(CarmenLat == 0) {
+	else if(distC > 30) {
 		content = "Can't find Carmen...";
 		content += " You are " + distW + " miles from Waldo ";
 		console.log(content); 
 	}
-	else if(WaldoLat == 0) {
+	else if(distW > 30) {
 		content = "Can't find Waldo...";
 		content += " You are " + distC + " from Carmen ";
 		console.log(content); 
 	}
-	else if (WaldoLat!=0 && CarmenLat!=0) {
+	else if (distW < 30 && distC<30) {
 		content = "You are " + distC + " miles away from Carmen and "
 		+ distW + " miles away from Waldo. ";
 		console.log(content); 
 	}
 	var info = new google.maps.InfoWindow();
-	var pos = new google.maps.LatLng(-42.7, -71.9);
+	var pos = new google.maps.LatLng(-42.4, -71.2);
+	var mark = new google.maps.Marker ({
+		position: pos,
+		map: map
+		}); 
 	console.log(content); 
-	info.setOptions({
-		content: content,
-		position: pos
-	});
-	info.open(map);
-	
+	info.setContent(content); 
+	google.maps.event.addListener(mark, 'click', function() {
+		info.open(map, marker);
+	}); 
 }
 function placeMe() {
 	me = new google.maps.LatLng(myLat, myLng); 
