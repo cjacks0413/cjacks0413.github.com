@@ -57,10 +57,6 @@ function calculateDistances()
 	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
 }
 function placeMe() {
-//	getMyLocation();
-	console.log("after getmy location"); 
-	console.log(myLat, myLng); 
-
 	me = new google.maps.LatLng(myLat, myLng); 
 	var meMarker = new google.maps.Marker({
 	position: me, 
@@ -68,8 +64,10 @@ function placeMe() {
 	title: "You are here: " 
 	}); 
 	meMarker.setMap(map); 
+	console.log("about to render map" );
 	renderMap(); 
-	
+	console.log("In place me " );
+	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
