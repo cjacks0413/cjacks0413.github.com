@@ -67,23 +67,23 @@ function placeMe() {
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
-	if(distW > 5 && distC > 5){
+	if(WaldoLat = 0 && CarmenLat = 0){
 		content += "Where's Waldo..? Can't find Carmen either...";
 	}
-	if(distC > 5) {
+	if(CarmenLat = 0) {
 		content += "Can't find Carmen...";
 		content += " You are " + distW + " miles from Waldo ";
 	}
-	if(distW > 5) {
+	if(WaldoLat = 0) {
 		content += "Can't find Waldo...";
 		content += " You are " + distC + " from Carmen ";
 	}
-	if(distR >= 5) {
+	if(distR > 5) {
 	content += "No Red Lines stops within 5 miles, sorry!";
 	content += " You are " + distW + " miles from Waldo "; 
 	content += "and " + distC + " miles from Carmen! ";
 	}
-	else {
+	else if (WaldoLat != 0 && CarmenLat != 0){
 	content += " You are " + distW + " miles from Waldo "; 
 	content += "and " + distC + " miles from Carmen! ";
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
@@ -124,30 +124,32 @@ function callback()
 }*/ 
 function findThem(locations)
 {
-
-	if(locations.length > 0) {
+	//sentinel 
+	if(location.length == 0) {
+		CarmenLat = 0;
+		WaldoLat = 0;
+	}
+	if(locations.length > 0) {	
 		if(locations.length == 1) {
 			if(locations[0].name == "Carmen Sandiego") {
-				 window.CarmenLat = locations[0].loc.latitude;
-				 window.CarmenLng = locations[0].loc.longitude;
-				 console.log(CarmenLat + " " + CarmenLng);
+				 CarmenLat = locations[0].loc.latitude;
+				 CarmenLng = locations[0].loc.longitude;
+				 WaldoLat = 0;
 				}
 			if(locations[0].name == "Waldo") {
-				 window.WaldoLat = locations[0].loc.latitude;
-				 window.WaldoLng = locations[0].loc.longitude;
-				 console.log(WaldoLat + " " + WaldoLng);
+				 WaldoLat = locations[0].loc.latitude;
+				 WaldoLng = locations[0].loc.longitude;
+				 CarmenLat = 0; 
 				 }
 		}
 		if(locations.length == 2) {
-				window.WaldoLat = locations[0].loc.latitude; 
-				window.WaldoLng = locations[0].loc.longitude; 
-				console.log(WaldoLat + " " + WaldoLng);
-				window.CarmenLat = locations[1].loc.latitude;
-				window.CarmenLat = locations[1].loc.longitude;
-				console.log(CarmenLat + " " + CarmenLng); 
+				WaldoLat = locations[0].loc.latitude; 
+				WaldoLng = locations[0].loc.longitude; 
+				CarmenLat = locations[1].loc.latitude;
+				CarmenLat = locations[1].loc.longitude;
 		}
 	} 
-		loadMarkers();  
+	loadMarkers();  
  
 }
 function findCarmenAndWaldo()
