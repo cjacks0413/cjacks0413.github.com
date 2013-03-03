@@ -83,7 +83,7 @@ function ShowDistances()
 		map: map
 		}); 
 	mark.setMap(map); 
-	console.log(content); 
+	document.write(content); 
 	info.setContent(content); 
 	google.maps.event.addListener(mark, 'click', function() {
 		info.open(map, mark);
@@ -106,8 +106,6 @@ function placeMe() {
 	content = meMarker.title + myLat + ", " + myLng + "! ";
 	if(distR > 5) {
 	content += "No Red Lines stops within 5 miles, sorry!";
-//	content += " You are " + distW + " miles from Waldo "; 
-//	content += "and " + distC + " miles from Carmen! ";
 	}
 //	else if (WaldoLat != 0 && CarmenLat != 0){
 //	content += " You are " + distW + " miles from Waldo "; 
