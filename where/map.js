@@ -196,7 +196,7 @@ function loadMarkers()
 		};
 
 	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
-	Waldo = new google.maps.LatLng(window.WaldoLat,window.WaldoLng);
+	Waldo = new google.maps.LatLng(WaldoLat, WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
 	WaldoMarker.setMap(map);
 	wInfo = new google.maps.InfoWindow(); 
@@ -205,7 +205,7 @@ function loadMarkers()
 		wInfo.open(map, WaldoMarker)
 		}); 
 		
-	Carmen = new google.maps.LatLng(window.CarmenLat, window.CarmenLng); 
+	Carmen = new google.maps.LatLng(CarmenLat, CarmenLng); 
 	CarmenMarker = new google.maps.Marker ({position: Carmen, title: "Here's Carmen!", icon: carmen}); 
 	CarmenMarker.setMap(map); 
 	cInfo = new google.maps.InfoWindow();
