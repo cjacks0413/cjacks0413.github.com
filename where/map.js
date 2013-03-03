@@ -23,7 +23,7 @@ function getMyLocation()
 	if(navigator.geolocation) {
 		console.log("geolocation"); 
 			navigator.geolocation.getCurrentPosition(function(position) {
-			console.lo("in geolocation"); 
+			console.log("in geolocation"); 
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
 			console.log(myLat, myLng); 
