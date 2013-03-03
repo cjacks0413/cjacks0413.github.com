@@ -51,27 +51,12 @@ function init()
 	getMyLocation();
 	
 }
-function calculateDistances()
+function ShowDistances()
 {
 	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
 	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
-}
-function placeMe() {
-	me = new google.maps.LatLng(myLat, myLng); 
-	var meMarker = new google.maps.Marker({
-	position: me, 
-	map: map,
-	title: "You are here: " 
-	}); 
-	meMarker.setMap(map); 
-	console.log("about to render map" );
-	renderMap(); 
-	console.log("In place me " );
-	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
-	distR = findClosestStop(); 
-	//set up content
-	content = meMarker.title + myLat + ", " + myLng + "! ";
-	if(WaldoLat == 0 && CarmenLat == 0){
+	var content; 
+		if(WaldoLat == 0 && CarmenLat == 0){
 		content += "Where's Waldo..? Can't find Carmen either...";
 	}
 	else if(CarmenLat == 0) {
@@ -82,17 +67,42 @@ function placeMe() {
 		content += "Can't find Waldo...";
 		content += " You are " + distC + " from Carmen ";
 	}
-	else if(distR > 5) {
+	var info = new google.maps.InfoWindow();
+	var pos = new google.maps.LatLng(-42.7, -71.9);
+	
+	info.setOptions({
+		content: content,
+		position: pos
+	});
+	infoWindow.open(map);
+	
+}
+function placeMe() {
+	me = new google.maps.LatLng(myLat, myLng); 
+	var meMarker = new google.maps.Marker({
+	position: me, 
+	map: map,
+	title: "You are here: " 
+	}); 
+	meMarker.setMap(map); 
+//	console.log("about to render map" );
+	renderMap(); 
+//	console.log("In place me " );
+//	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
+//	distR = findClosestStop(); 
+	//set up content
+	content = meMarker.title + myLat + ", " + myLng + "! ";
+	if(distR > 5) {
 	content += "No Red Lines stops within 5 miles, sorry!";
-	content += " You are " + distW + " miles from Waldo "; 
-	content += "and " + distC + " miles from Carmen! ";
+//	content += " You are " + distW + " miles from Waldo "; 
+//	content += "and " + distC + " miles from Carmen! ";
 	}
-	else if (WaldoLat != 0 && CarmenLat != 0){
-	content += " You are " + distW + " miles from Waldo "; 
-	content += "and " + distC + " miles from Carmen! ";
+//	else if (WaldoLat != 0 && CarmenLat != 0){
+//	content += " You are " + distW + " miles from Waldo "; 
+//	content += "and " + distC + " miles from Carmen! ";
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
 	+ distR.closest + " miles away."; 
-	}
+//	}
 	//set up info window
 	var infowindow = new google.maps.InfoWindow(); 	
     google.maps.event.addListener(meMarker, 'click', function() {
@@ -154,7 +164,7 @@ function findThem(locations)
 		}
 	} 
 	loadMarkers();  
-	calculateDistances();
+	ShowDistances();
 	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	console.log(distW, distC); 
  
