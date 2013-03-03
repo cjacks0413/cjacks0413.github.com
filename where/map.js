@@ -57,7 +57,7 @@ function ShowDistances()
 	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
 	
 	var content; 
-	if(distC > 30 && distC > 30){
+	if(distC > 30 && distW > 30){
 		content = "Where's Waldo..? Can't find Carmen either...";
 		console.log(content);
 	}
@@ -77,7 +77,7 @@ function ShowDistances()
 		console.log(content); 
 	}
 	var info = new google.maps.InfoWindow();
-	var pos = new google.maps.LatLng(-42.4, -71.2);
+	var pos = new google.maps.LatLng(-42.4009, -71.1);
 	var mark = new google.maps.Marker ({
 		position: pos,
 		map: map
