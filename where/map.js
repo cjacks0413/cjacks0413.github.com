@@ -117,8 +117,8 @@ function placeMe() {
 //	}
 	//set up info window
 	var infowindow = new google.maps.InfoWindow(); 	
+	infowindow.setContent(content);
     google.maps.event.addListener(meMarker, 'click', function() {
-    infowindow.setContent(content), 
 	infowindow.open(map,meMarker)
 	}); 
 }
