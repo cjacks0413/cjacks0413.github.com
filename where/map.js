@@ -17,6 +17,9 @@ var CarmenLng = 0;
 var WaldoLat = 0;
 var WaldoLng = 0; 
 
+var distW = 0;
+var distC = 0;
+
 var mapContent; 
 function getMyLocation()
 {
@@ -48,6 +51,11 @@ function init()
 	getMyLocation();
 	
 }
+function calculateDistances()
+{
+	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
+	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
+}
 function placeMe() {
 //	getMyLocation();
 	console.log("after getmy location"); 
@@ -61,9 +69,7 @@ function placeMe() {
 	}); 
 	meMarker.setMap(map); 
 	renderMap(); 
-	console.log(CarmenLat, CarmenLng, WaldoLat, WaldoLng); 
-	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
-	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
+
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
@@ -83,7 +89,7 @@ function placeMe() {
 	content += " You are " + distW + " miles from Waldo "; 
 	content += "and " + distC + " miles from Carmen! ";
 	}
-	else if (WaldoLat != 0 && CarmenLat != 0){*/
+	else if (WaldoLat != 0 && CarmenLat != 0){
 	content += " You are " + distW + " miles from Waldo "; 
 	content += "and " + distC + " miles from Carmen! ";
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
@@ -150,6 +156,7 @@ function findThem(locations)
 		}
 	} 
 	loadMarkers();  
+	calculateDistances(); 
  
 }
 function findCarmenAndWaldo()
