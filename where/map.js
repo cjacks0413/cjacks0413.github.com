@@ -46,6 +46,8 @@ center = new google.maps.LatLng(42.330678, -71.06678);
 function init() {
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
 	getMyLocation();
+	console.log("after getmy location"); 
+	console.log(myLat, myLng); 
 //	test(); 
 	me = new google.maps.LatLng(myLat, myLng); 
 	
