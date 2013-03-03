@@ -158,6 +158,7 @@ function findThem(locations)
 	loadMarkers();  
 	calculateDistances();
 	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
+	console.log(distW, distC); 
  
 }
 function findCarmenAndWaldo()
