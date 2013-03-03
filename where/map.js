@@ -168,8 +168,8 @@ function findThem(locations)
 				CarmenLat = locations[1].loc.longitude;
 		}
 	} 
-	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	loadMarkers();  
+	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	ShowDistances();
  
 }
@@ -195,7 +195,7 @@ function loadMarkers()
 		scaledSize: new google.maps.Size(25,25)
 		};
 
-
+	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	Waldo = new google.maps.LatLng(window.WaldoLat,window.WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
 	WaldoMarker.setMap(map);
