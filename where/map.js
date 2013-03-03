@@ -81,8 +81,8 @@ function ShowDistances()
 	info.setContent(content);
 	info.open(map); 
 //	google.maps.event.addListener(mark, 'click', function() {
-		info.open(map, mark);
-	}); //
+//		info.open(map, mark);
+//	}); //
 }
 function placeMe() {
 	me = new google.maps.LatLng(myLat, myLng); 
