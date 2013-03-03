@@ -168,6 +168,7 @@ function findThem(locations)
 				CarmenLat = locations[1].loc.longitude;
 		}
 	} 
+	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	loadMarkers();  
 	ShowDistances();
  
