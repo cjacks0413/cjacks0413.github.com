@@ -82,6 +82,7 @@ function ShowDistances()
 		position: pos,
 		map: map
 		}); 
+	mark.setMap(map); 
 	console.log(content); 
 	info.setContent(content); 
 	google.maps.event.addListener(mark, 'click', function() {
