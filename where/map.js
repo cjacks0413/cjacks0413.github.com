@@ -86,7 +86,7 @@ function ShowDistances()
 	console.log(content); 
 	info.setContent(content); 
 	google.maps.event.addListener(mark, 'click', function() {
-		info.open(map, marker);
+		info.open(map, mark);
 	}); 
 }
 function placeMe() {
