@@ -67,18 +67,25 @@ function placeMe() {
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
-	if(distW > 5) {
-		content += "Where's Waldo..? ";
+	if(distW > 5 && distC > 5){
+		content += "Where's Waldo..? Can't find Carmen either...";
 	}
 	if(distC > 5) {
 		content += "Can't find Carmen...";
+		content += " You are " + distW + " miles from Waldo ";
+	}
+	if(distW > 5) {
+		content += "Can't find Waldo...";
+		content += " You are " + distC + " from Carmen ";
 	}
 	if(distR >= 5) {
 	content += "No Red Lines stops within 5 miles, sorry!";
+	content += " You are " + distW + " miles from Waldo "; 
+	content += "and " + distC + " miles from Carmen! ";
 	}
 	else {
 	content += " You are " + distW + " miles from Waldo "; 
-	content += "and " + distC + " miles from Carmen! "; 
+	content += "and " + distC + " miles from Carmen! ";
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
 	+ distR.closest + " miles away."; 
 	}
