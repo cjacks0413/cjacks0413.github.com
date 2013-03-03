@@ -67,13 +67,21 @@ function placeMe() {
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
+	if(distW > 5) {
+		content += "Where's Waldo..? ";
+	}
+	if(distC > 5) {
+		content += "Can't find Carmen...";
+	}
+	if(distR >= 5) {
+	content += "No Red Lines stops within 5 miles, sorry!";
+	}
+	else {
 	content += " You are " + distW + " miles from Waldo "; 
 	content += "and " + distC + " miles from Carmen! "; 
-	if(distR >= 5) {
-		content += "No Red Lines stops within 5 miles, sorry!";
-	}
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
 	+ distR.closest + " miles away."; 
+	}
 	//set up info window
 	var infowindow = new google.maps.InfoWindow(); 	
     google.maps.event.addListener(meMarker, 'click', function() {
