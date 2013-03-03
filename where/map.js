@@ -70,15 +70,15 @@ function placeMe() {
 	if(WaldoLat == 0 && CarmenLat == 0){
 		content += "Where's Waldo..? Can't find Carmen either...";
 	}
-	if(CarmenLat == 0) {
+	else if(CarmenLat == 0) {
 		content += "Can't find Carmen...";
 		content += " You are " + distW + " miles from Waldo ";
 	}
-	if(WaldoLat == 0) {
+	else if(WaldoLat == 0) {
 		content += "Can't find Waldo...";
 		content += " You are " + distC + " from Carmen ";
 	}
-	if(distR > 5) {
+	else if(distR > 5) {
 	content += "No Red Lines stops within 5 miles, sorry!";
 	content += " You are " + distW + " miles from Waldo "; 
 	content += "and " + distC + " miles from Carmen! ";
