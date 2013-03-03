@@ -24,9 +24,7 @@ var mapContent;
 function getMyLocation()
 {
 	if(navigator.geolocation) {
-		console.log("geolocation"); 
 			navigator.geolocation.getCurrentPosition(function(position) {
-			console.log("in geolocation"); 
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
 			placeMe(); 
@@ -59,25 +57,21 @@ function ShowDistances()
 	var content; 
 	if(distC > 30 && distW > 30){
 		content = "Where's Waldo..? Can't find Carmen either...";
-		console.log(content);
 	}
 	else if(distC > 30) {
 		content = "Can't find Carmen...";
 		content += " You are " + distW + " miles from Waldo ";
-		console.log(content); 
 	}
 	else if(distW > 30) {
 		content = "Can't find Waldo...";
 		content += " You are " + distC + " from Carmen ";
-		console.log(content); 
 	}
 	else if (distW < 30 && distC<30) {
 		content = "You are " + distC + " miles away from Carmen and "
 		+ distW + " miles away from Waldo. ";
-		console.log(content); 
 	}
 	var info = new google.maps.InfoWindow();
-	var pos = new google.maps.LatLng(42.4009, -71.1);
+	var pos = new google.maps.LatLng(42.4009, -71.10);
 	var mark = new google.maps.Marker ({
 		position: pos,
 		map: map
