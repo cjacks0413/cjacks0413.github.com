@@ -21,9 +21,12 @@ var mapContent;
 function getMyLocation()
 {
 	if(navigator.geolocation) {
+		console.log("geolocation"); 
 			navigator.geolocation.getCurrentPosition(function(position) {
+			console.lo("in geolocation"); 
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
+			console.log(myLat, myLng); 
 	}); 
 	}
 	else {
@@ -108,7 +111,7 @@ function callback()
 }*/ 
 function findThem(locations)
 {
-	console.log(locations); 
+
 	if(locations.length > 0) {
 		if(locations.length == 1) {
 			if(locations[0].name == "Carmen Sandiego") {
@@ -155,11 +158,7 @@ function loadMarkers()
 		anchor: new google.maps.Point(17, 34),
 		scaledSize: new google.maps.Size(25,25)
 		};
-		
-//	request2.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
-//	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
-//	request2.send(null);
-//	request2.onreadystatechange = callback2; 
+
 
 	Waldo = new google.maps.LatLng(window.WaldoLat,window.WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
@@ -183,7 +182,6 @@ function loadMarkers()
 
 function getCarmenAndWaldo()
 {
-//	request2.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
 	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
 	request2.onreadystatechange = callback2;
 	request2.send(null);
@@ -192,7 +190,6 @@ function getCarmenAndWaldo()
 
 function callback2()
 {
-	console.log(this.readyState); 
 	if(this.readyState == 4 && this.status == 200) {
 		string = this.responseText;
 		locations = JSON.parse(string); 
@@ -383,10 +380,10 @@ redBraintreeBranch = new google.maps.Polyline({
 	strokeWeight: 10,
 	});
 	redBraintreeBranch.setMap(map); 
-
+ 
 //markers 	
 for (var m in markers) {
-	console.log(markers[m]); 
+//	console.log(markers[m]); 
 //	console.log(markers[m].title); 
 	markers[m].setMap(map);
 	google.maps.event.addListener(markers[m], 'click', function() {
@@ -424,9 +421,7 @@ for (var m in markers) {
 			infowindow.open(map, object);
 			}); 
 		}
-//	}
-//	returnMe = markers;
-//	return returnMe; 
+
 }
 
 
@@ -483,13 +478,7 @@ function makeData(stops, m)
 	}
 }
 
-function test()
-{
-	console.log(window.redStations);
-	console.log(window.markers);
-	console.log(window.redAshmont);
-	console.log(window.redBraintree); 
-}
+
 
 
 
