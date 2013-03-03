@@ -12,10 +12,10 @@ var locations;
 var stops; 
 var infowindow = new google.maps.InfoWindow(); 
 
-var CarmenLat = 42.33058;
-var CarmenLng = -71.06633;
-var WaldoLat = 42.39650;
-var WaldoLng = -71.121824; 
+var CarmenLat = 0;
+var CarmenLng = 0;
+var WaldoLat = 0;
+var WaldoLng = 0; 
 
 var mapContent; 
 function getMyLocation()
