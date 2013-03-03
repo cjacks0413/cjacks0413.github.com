@@ -67,14 +67,14 @@ function placeMe() {
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
-	if(WaldoLat = 0 && CarmenLat = 0){
+	if(WaldoLat == 0 && CarmenLat == 0){
 		content += "Where's Waldo..? Can't find Carmen either...";
 	}
-	if(CarmenLat = 0) {
+	if(CarmenLat == 0) {
 		content += "Can't find Carmen...";
 		content += " You are " + distW + " miles from Waldo ";
 	}
-	if(WaldoLat = 0) {
+	if(WaldoLat == 0) {
 		content += "Can't find Waldo...";
 		content += " You are " + distC + " from Carmen ";
 	}
