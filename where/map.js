@@ -116,10 +116,10 @@ function placeMe() {
 	+ distR.closest + " miles away."; 
 //	}
 	//set up info window
-	var infowindow = new google.maps.InfoWindow(); 	
-	infowindow.setContent(content);
+	var info = new google.maps.InfoWindow(); 	
+	info.setContent(content);
     google.maps.event.addListener(meMarker, 'click', function() {
-	infowindow.open(map,meMarker)
+	info.open(map,meMarker)
 	}); 
 }
 
