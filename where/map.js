@@ -1,5 +1,5 @@
-myLat = 42.40093; //for now near davis square 
-myLng = -71.121815;
+var myLat = 42.40093; //for now near davis square 
+var myLng = -71.121815;
 
 request = new XMLHttpRequest(); 
 request2 = new XMLHttpRequest(); 
