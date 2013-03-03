@@ -1,4 +1,4 @@
-myLat = 42.39500; //for now near davis square 
+myLat = 42.40093; //for now near davis square 
 myLng = -71.121815;
 
 request = new XMLHttpRequest(); 
@@ -17,13 +17,15 @@ var CarmenLng = -71.06633;
 var WaldoLat = 42.39650;
 var WaldoLng = -71.121824; 
 
+var mapContent; 
 function getMyLocation()
 {
 	if(navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
-	}); }
+	}); 
+	}
 	else {
 		alert("Sorry, HTML5 geolocation is not supported on your browser.");
 	}
@@ -41,34 +43,37 @@ center = new google.maps.LatLng(42.330678, -71.06678);
 function init() {
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
 	getMyLocation();
-	
+//	test(); 
 	me = new google.maps.LatLng(myLat, myLng); 
+	
+/*    myMarkers = new Array();
+    myMarkers = renderRedLine();*/
 	var meMarker = new google.maps.Marker({
 	position: me, 
 	map: map,
 	title: "You are here: " 
 	}); 
 	meMarker.setMap(map); 
-	
+	renderMap(); 
+
 	distW = getDistanceFromPoint(myLat, myLng, WaldoLat, WaldoLng);
 	distC = getDistanceFromPoint(myLat, myLng, CarmenLat, CarmenLng); 
-//	distR = findClosestStop(); 
+	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
-	content += " You are " + distW + " kilometers from Waldo "; 
-	content += "and " + distC + " kilometers from Carmen! "; 
-/*	if(distR >= 5) {
-		content += "No Red Lines stops within 5 kilometers, sorry!";
+	content += " You are " + distW + " miles from Waldo "; 
+	content += "and " + distC + " miles from Carmen! "; 
+	if(distR >= 5) {
+		content += "No Red Lines stops within 5 miles, sorry!";
 	}
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
-	+ distR.closest + " kilometers away."; */
+	+ distR.closest + " miles away."; 
 	//set up info window
 	var infowindow = new google.maps.InfoWindow(); 	
     google.maps.event.addListener(meMarker, 'click', function() {
     infowindow.setContent(content), 
 	infowindow.open(map,meMarker)
 	}); 
-	renderMap(); 
 }
 
 function findMyPosition() 
@@ -84,6 +89,7 @@ function renderMap()
 	map.panTo(me);
 	renderRedLine();
 	findCarmenAndWaldo();
+
 }
 /*
 function parse_stops()
@@ -100,8 +106,39 @@ function callback()
 		stops = JSON.parse(str);
 	}
 }*/ 
-
+function findThem(locations)
+{
+	console.log(locations); 
+	if(locations.length > 0) {
+		if(locations.length == 1) {
+			if(locations[0].name == "Carmen Sandiego") {
+				 window.CarmenLat = locations[0].loc.latitude;
+				 window.CarmenLng = locations[0].loc.longitude;
+				 console.log(CarmenLat + " " + CarmenLng);
+				}
+			if(locations[0].name == "Waldo") {
+				 window.WaldoLat = locations[0].loc.latitude;
+				 window.WaldoLng = locations[0].loc.longitude;
+				 console.log(WaldoLat + " " + WaldoLng);
+				 }
+		}
+		if(locations.length == 2) {
+				window.WaldoLat = locations[0].loc.latitude; 
+				window.WaldoLng = locations[0].loc.longitude; 
+				console.log(WaldoLat + " " + WaldoLng);
+				window.CarmenLat = locations[1].loc.latitude;
+				window.CarmenLat = locations[1].loc.longitude;
+				console.log(CarmenLat + " " + CarmenLng); 
+		}
+	} 
+		loadMarkers();  
+ 
+}
 function findCarmenAndWaldo()
+{
+	getCarmenAndWaldo();
+}
+function loadMarkers()
 {
 	var waldo = {
 		url: 'waldo.png',
@@ -119,11 +156,12 @@ function findCarmenAndWaldo()
 		scaledSize: new google.maps.Size(25,25)
 		};
 		
-	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
-	request2.send(null);
-	request2.onreadystatechange = callback2; 
+//	request2.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
+//	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
+//	request2.send(null);
+//	request2.onreadystatechange = callback2; 
 
-	Waldo = new google.maps.LatLng(WaldoLat, WaldoLng);
+	Waldo = new google.maps.LatLng(window.WaldoLat,window.WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
 	WaldoMarker.setMap(map);
 	wInfo = new google.maps.InfoWindow(); 
@@ -132,7 +170,7 @@ function findCarmenAndWaldo()
 		wInfo.open(map, WaldoMarker)
 		}); 
 		
-	Carmen = new google.maps.LatLng(CarmenLat, CarmenLng); 
+	Carmen = new google.maps.LatLng(window.CarmenLat, window.CarmenLng); 
 	CarmenMarker = new google.maps.Marker ({position: Carmen, title: "Here's Carmen!", icon: carmen}); 
 	CarmenMarker.setMap(map); 
 	cInfo = new google.maps.InfoWindow();
@@ -140,11 +178,30 @@ function findCarmenAndWaldo()
 		cInfo.setContent(CarmenMarker.title), 
 		cInfo.open(map, CarmenMarker)
 		});
-}		
+}
+		
 
+function getCarmenAndWaldo()
+{
+//	request2.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
+	request2.open("GET", "http://messagehub.herokuapp.com/a3.json", true);
+	request2.onreadystatechange = callback2;
+	request2.send(null);
+}
+
+
+function callback2()
+{
+	console.log(this.readyState); 
+	if(this.readyState == 4 && this.status == 200) {
+		string = this.responseText;
+		locations = JSON.parse(string); 
+		findThem(locations); 
+	}
+}
 function getDistanceFromPoint(myLat, myLng, lat2, lng2)
 {
-	var R = 6371;
+	var R = 3961;
 	var dLat = deg2rad(lat2 - myLat);
 	var dLon = deg2rad(lng2 - myLng);
 	var a = 
@@ -156,38 +213,11 @@ function getDistanceFromPoint(myLat, myLng, lat2, lng2)
 	return distance; 
 }	
 
-
 function deg2rad(deg) {
 	return deg * (Math.PI/180); 
 }
-/*
-function callback2()
-{
-	console.log(request.readyState); 
-	if(request.readyState == 4 && request.status == 200) {
-		string = request.responseText;
-		locations = JSON.parse(string); 
-	}
-	
-	if(locations.length > 0) {
-		if(locations.length == 1) {
-			if(locations[1].name == "Carmen Sandiego") {
-				 CarmenLat = locations[1].latitude;
-				 CarmenLng = locations[1].longitude;
-				}
-			if(locations[1].name == "Waldo") {
-				 WaldoLat = locations[1].latitude;
-				 WaldoLng = locations[1].longitude;
-				 }
-		}
-		if(locations.length == 2) {
-				WaldoLat = locations[1].latitude; 
-				WaldoLng = locations[1].longitude; 
-				CarmenLat = locations[2].latitude;
-				CarmenLat = locations[2].longitude;
-		}
-	}
-}	*/ 
+
+
 function findClosestStop()
 {
 
@@ -195,7 +225,7 @@ function findClosestStop()
 	var curr;  
 	var stationName; 
 	var allInfo = {closest: 5, stationName: ""}; 
-	for(i=0;i<redStations.length;i++){
+	for(i=0;i<markers.length;i++){
 		curr = getDistanceFromPoint(myLat,myLng,markers[i].position.hb,markers[i].position.ib);
 		if(curr < closest) {
 			closest = curr;
@@ -221,16 +251,21 @@ function renderRedLine()
 	redStations.push(alewife); 
 	markers.push(new google.maps.Marker ({position: alewife, title: "Alewife Station",
 	keyNorth: "RALEN", keySouth: "", icon: image})); 
+
+	davis = new google.maps.LatLng(42.39674, -71.121815);
+	redStations.push(davis);
+	markers.push(new google.maps.Marker({position: davis, title: "Davis Station", 
+	keyNorth: "RDAVN", keySouth: "RDAVS", icon: image})); 
 	
 	porter = new google.maps.LatLng(42.39674,-71.121815); 
 	redStations.push(porter); 
 	markers.push(new google.maps.Marker({position: porter, title: "Porter Station", 
-	keyNorth: "RDAVN", keySouth: "RDAVS", icon: image}));
+	keyNorth: "RPORN", keySouth: "RPORS", icon: image}));
 
 	harvard = new google.maps.LatLng(42.373362, -71.118956);
 	redStations.push(harvard); 
 	markers.push(new google.maps.Marker ({position: harvard, title: "Harvard Station", 
-	keyNorth: "RPORN", keySouth: "RPORS", icon: image}));
+	keyNorth: "RHARN", keySouth: "RHARS", icon: image}));
 
 	central = new google.maps.LatLng(42.365486, -71.10382); 
 	redStations.push(central); 
@@ -324,7 +359,7 @@ function renderRedLine()
 	redBraintree.push(braintree); 
 	markers.push(new google.maps.Marker ({position: braintree,title: "Braintree Station",
 	keyNorth: "", keySouth: "RBRAS", icon: image }));
-	
+
 //polyline	
 redLine = new google.maps.Polyline({
 	path: redStations,
@@ -348,31 +383,50 @@ redBraintreeBranch = new google.maps.Polyline({
 	strokeWeight: 10,
 	});
 	redBraintreeBranch.setMap(map); 
+
 //markers 	
 for (var m in markers) {
-	markers[m].setMap(map);
+	console.log(markers[m]); 
 //	console.log(markers[m].title); 
-//	for(i=0;i<markers.length;i++); {
-	//	markers[i].setMap(map);
-	//	console.log(markers[i].title); 
+	markers[m].setMap(map);
 	google.maps.event.addListener(markers[m], 'click', function() {
-			var content = this.title; 
+		//	console.log(this.title); 
 			object = this;
+			mapContent = this.title;
+		//	var content = this.title; 
+		//	console.log(this.title); 
+			//object = this;
+			function useData(stops) {
+				console.log(object.keyNorth); 
+				if(object.keyNorth == stops[i].PlatformKey) {
+					mapContent += " NORTHBOUND " + stops[i].TimeRemaining;
+					console.log(content);
+					
+				}
+				if(object.keySouth == stops[i].PlatformKey) {
+					content += "SOUTHBOUND " + stops[i].TimeRemaining;
+					console.log(content);
+				}
+				i++;
+			}
 			request.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
 			request.send(null);
 			request.onreadystatechange = function() {
-				 	if(request.readyState == 4 && request.status == 200) {
-					str = request.responseText; 
+				 	if(this.readyState == 4 && this.status == 200) {
+					str = this.responseText; 
 					stops = JSON.parse(str);
-					console.log(markers[m].title); 
-					makeData(stops, markers[m]);
+					useData(stops);
+//					console.log(markers[m].title); 
+//					makeData(stops, markers[m]);
 					}
 			}			
-			infowindow.setContent(content);
+			infowindow.setContent(mapContent);
 			infowindow.open(map, object);
 			}); 
 		}
 //	}
+//	returnMe = markers;
+//	return returnMe; 
 }
 
 
@@ -428,7 +482,14 @@ function makeData(stops, m)
  	//}
 	}
 }
-		
+
+function test()
+{
+	console.log(window.redStations);
+	console.log(window.markers);
+	console.log(window.redAshmont);
+	console.log(window.redBraintree); 
+}
 
 
 
