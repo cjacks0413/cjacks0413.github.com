@@ -26,7 +26,7 @@ function getMyLocation()
 			console.log("in geolocation"); 
 			myLat = position.coords.latitude;
 			myLng = position.coords.longitude;
-			console.log(myLat, myLng); 
+			placeMe(); 
 	}); 
 	}
 	else {
@@ -42,17 +42,18 @@ center = new google.maps.LatLng(42.330678, -71.06678);
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
 
-
-function init() {
+function init()
+{
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
 	getMyLocation();
+	
+}
+function placeMe() {
+//	getMyLocation();
 	console.log("after getmy location"); 
 	console.log(myLat, myLng); 
-//	test(); 
+
 	me = new google.maps.LatLng(myLat, myLng); 
-	
-/*    myMarkers = new Array();
-    myMarkers = renderRedLine();*/
 	var meMarker = new google.maps.Marker({
 	position: me, 
 	map: map,
@@ -81,11 +82,6 @@ function init() {
 	}); 
 }
 
-function findMyPosition() 
-{
-	//geolocation, do check if supported on browser 
-	renderMap();
-}
 
 function renderMap() 
 {
