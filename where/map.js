@@ -69,7 +69,7 @@ function placeMe() {
 	}); 
 	meMarker.setMap(map); 
 	renderMap(); 
-
+	
 	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
@@ -156,7 +156,8 @@ function findThem(locations)
 		}
 	} 
 	loadMarkers();  
-	calculateDistances(); 
+	calculateDistances();
+	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
  
 }
 function findCarmenAndWaldo()
