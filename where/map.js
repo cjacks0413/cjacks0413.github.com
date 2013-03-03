@@ -74,7 +74,7 @@ function ShowDistances()
 		content: content,
 		position: pos
 	});
-	infoWindow.open(map);
+	info.open(map);
 	
 }
 function placeMe() {
@@ -89,7 +89,7 @@ function placeMe() {
 	renderMap(); 
 //	console.log("In place me " );
 //	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
-//	distR = findClosestStop(); 
+	distR = findClosestStop(); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
 	if(distR > 5) {
