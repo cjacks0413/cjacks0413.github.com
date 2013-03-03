@@ -78,16 +78,17 @@ function ShowDistances()
 	}
 	var info = new google.maps.InfoWindow();
 	var pos = new google.maps.LatLng(-42.4009, -71.1);
-	var mark = new google.maps.Marker ({
+/*	var mark = new google.maps.Marker ({
 		position: pos,
 		map: map
-		}); 
-	mark.setMap(map); 
-	document.write(content); 
-	info.setContent(content); 
-	google.maps.event.addListener(mark, 'click', function() {
-		info.open(map, mark);
-	}); 
+		}); */ 
+//	mark.setMap(map); 
+	info.setPosition(pos); 
+	info.setContent(content);
+	info.open(map); 
+//	google.maps.event.addListener(mark, 'click', function() {
+//		info.open(map, mark);
+//	}); 
 }
 function placeMe() {
 	me = new google.maps.LatLng(myLat, myLng); 
