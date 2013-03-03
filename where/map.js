@@ -71,7 +71,7 @@ function ShowDistances()
 		+ distW + " miles away from Waldo. ";
 	}
 	var info = new google.maps.InfoWindow();
-	var pos = new google.maps.LatLng(42.49, -71.10);
+	var pos = new google.maps.LatLng(42.49, -71.12);
 /*	var mark = new google.maps.Marker ({
 		position: pos,
 		map: map
