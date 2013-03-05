@@ -46,6 +46,7 @@ center = new google.maps.LatLng(42.330678, -71.06678);
 function init()
 {
 	map = new google.maps.Map(document.getElementById("map"), mapOptions); 
+	renderMap(); 
 	getMyLocation();
 	
 }
@@ -84,7 +85,7 @@ function placeMe() {
 	title: "You are here: " 
 	}); 
 	meMarker.setMap(map); 
-	renderMap(); 
+//	renderMap(); 
 	distR = findClosestStop(); 
 	console.log("distR");
 	console.log(distR); 
