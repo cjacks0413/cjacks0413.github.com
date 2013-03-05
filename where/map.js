@@ -72,17 +72,9 @@ function ShowDistances()
 	}
 	var info = new google.maps.InfoWindow();
 	var pos = new google.maps.LatLng(42.41, -71.12);
-/*	var mark = new google.maps.Marker ({
-		position: pos,
-		map: map
-		}); 
-	mark.setMap(map); */
 	info.setPosition(pos); 
 	info.setContent(content);
 	info.open(map); 
-//	google.maps.event.addListener(mark, 'click', function() {
-//		info.open(map, mark);
-//	}); //
 }
 function placeMe() {
 	me = new google.maps.LatLng(myLat, myLng); 
@@ -92,10 +84,7 @@ function placeMe() {
 	title: "You are here: " 
 	}); 
 	meMarker.setMap(map); 
-//	console.log("about to render map" );
 	renderMap(); 
-//	console.log("In place me " );
-//	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	distR = findClosestStop(); 
 	console.log("distR");
 	console.log(distR); 
@@ -104,12 +93,8 @@ function placeMe() {
 	if(distR > 5) {
 	content += "No Red Lines stops within 5 miles, sorry!";
 	}
-//	else if (WaldoLat != 0 && CarmenLat != 0){
-//	content += " You are " + distW + " miles from Waldo "; 
-//	content += "and " + distC + " miles from Carmen! ";
 	content+= "The nearest Red Line stop is " + distR.stationName + ", and it is "
 	+ distR.closest + " miles away."; 
-//	}
 	//set up info window
 	var info = new google.maps.InfoWindow(); 	
 	info.setContent(content);
@@ -122,27 +107,12 @@ function placeMe() {
 function renderMap() 
 {
 	curLocation = new google.maps.LatLng(myLat, myLng);
-//	parse_stops();
 	map.panTo(me);
 	renderRedLine();
 	findCarmenAndWaldo();
 
 }
-/*
-function parse_stops()
-{
-	request.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
-	request.send(null);
-	request.onreadystatechange = callback; 
-}
 
-function callback()
-{
-	if(request.readyState == 4 && request.status == 200) {
-		str = request.responseText; 
-		stops = JSON.parse(str);
-	}
-}*/ 
 function findThem(locations)
 {
 	//sentinel 
@@ -456,59 +426,6 @@ for (var m in markers) {
 		}
 }
 
-
-function makeData(stops, m)
-{
-	console.log(stops); 
-	tab = document.createElement('table'); 
-	tab.setAttribute('id', 'newtable'); 
-	tableBody = document.createElement('tbody'); 
-	for(i=0;i<stops.length;i++){
-		if(stops[i].Line == "Red") { 
-		console.log(stops[i].PlatformKey); 
-		console.log(m.title); 
-			if(stops[i].PlatformKey == m.keyNorth){
-				row = document.createElement('tr'); 
-				cell = document.createElement('td'); 
-				content = document.createTextNode(stops[i].TimeRemaining); 
-				cell.appendChild(content); 
-				row.appendChild(cell);
-				dir = document.createElement('td');
-				content2 = document.createTextNode("NORTHBOUND"); 
-				dir.appendChild(content2);
-				cell.appendChild(content);
-				tableBody.appendChild(cell); 
-/*			console.log(m.title); 
-			console.log(stops[i].PlatformKey); 
-			console.log("Direction is NORTH");
-			console.log(stops[i].TimeRemaining);*/
-			}
-			if(stops[i].PlatformKey == m.keySouth){
-				row = document.createElement('tr'); 
-				cell = document.createElement('td'); 
-				content = document.createTextNode(stops[i].TimeRemaining); 
-				cell.appendChild(content); 
-				row.appendChild(cell);
-				dir = document.createElement('td');
-				content2 = document.createTextNode("SOUTHBOUND"); 
-				dir.appendChild(content2);
-				cell.appendChild(content);
-				tableBody.appendChild(cell); 
-/*				console.log(m.title); 
-				console.log(stops[i].PlatformKey); 
-				console.log("Direction is SOUTH");
-				console.log(stops[i].TimeRemaining); */
-			}
-		//m will have the name
-		//keyOf, passed m.title
-		//if the key of m.title == to stops[i].plaformkey
-		//add the time
-		//add the direction 
-			
- 		}
- 	//}
-	}
-}
 
 
 
