@@ -234,18 +234,13 @@ function findClosestStop()
 	var curr;  
 	var stationName; 
 	var allInfo = {closest: 5, stationName: ""}; 
-	console.log(markers); 
 	for(i=0;i<markers.length;i++){
-		console.log(myLat,myLng, markers[i].position.jb,markers[i].position.ib); 
 		curr = getDistanceFromPoint(myLat,myLng,markers[i].position.ib,markers[i].position.jb);
-		console.log(curr); 
 		if(curr < closest) {
 			closest = curr;
 			stationName = markers[i].title;
 		} 
 	}
-	console.log("in closest");
-	console.log(closest); 
 	allInfo.closest = closest;
 	allInfo.stationName = stationName;
 	return allInfo; 
@@ -408,10 +403,10 @@ for (var m in markers) {
 			function useData(stops) {
 				for(i=0;i<stops.length;i++) {
 					if(object.keyNorth == stops[i].PlatformKey) {
-						mapContent += '<tr><td>"NORTHBOUND"' + '</td><td>' + stops[i].Time + '</td></tr>';
+						mapContent += '<tr><td>NORTHBOUND</td><td>' + stops[i].Time + '</td></tr>';
 					}
 					if(object.keySouth == stops[i].PlatformKey) {
-						mapContent += '<tr><td>"SOUTHBOUND"' + '</td><td>' + stops[i].Time + '</td></tr>';
+						mapContent += '<tr><td>SOUTHBOUND</td><td>' + stops[i].Time + '</td></tr>';
 					}
 				}
 				infowindow.setContent(mapContent);
