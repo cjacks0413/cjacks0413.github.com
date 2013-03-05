@@ -234,6 +234,7 @@ function callback2()
 }
 function getDistanceFromPoint(myLat, myLng, lat2, lng2)
 {
+	console.log(myLat, myLng, lat2, lng2); 
 	var R = 3961;
 	var dLat = deg2rad(lat2 - myLat);
 	var dLon = deg2rad(lng2 - myLng);
