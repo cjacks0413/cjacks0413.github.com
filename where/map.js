@@ -430,17 +430,20 @@ for (var m in markers) {
 		//	console.log(this.title); 
 			//object = this;
 			function useData(stops) {
-				console.log(object.keyNorth); 
-				if(object.keyNorth == stops[i].PlatformKey) {
-					mapContent += " NORTHBOUND " + stops[i].TimeRemaining;
-					console.log(mapContent);
+//				console.log(object.keyNorth); 
+				for(i=0;i<stops.length;i++) {
+					if(object.keyNorth == stops[i].PlatformKey) {
+						mapContent += " NORTHBOUND " + stops[i].TimeRemaining;
+						console.log("keynorth");
+						console.log(mapContent);
 					
+					}
+					if(object.keySouth == stops[i].PlatformKey) {
+						mapContent += "SOUTHBOUND " + stops[i].TimeRemaining;
+						console.log("keysouth");
+						console.log(mapContent);
+					}
 				}
-				if(object.keySouth == stops[i].PlatformKey) {
-					mapContent += "SOUTHBOUND " + stops[i].TimeRemaining;
-					console.log(mapContent);
-				}
-				i++;
 			}
 			request.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
 			request.send(null);
@@ -454,6 +457,7 @@ for (var m in markers) {
 					}
 			}			
 			infowindow.setContent("<p>Test</p>");
+			console.log("endcontent"); 
 			console.log(mapContent); 
 			infowindow.open(map, object);
 			}); 
