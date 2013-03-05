@@ -433,11 +433,14 @@ for (var m in markers) {
 //				console.log(object.keyNorth); 
 				for(i=0;i<stops.length;i++) {
 					if(object.keyNorth == stops[i].PlatformKey) {
-						mapContent += " NORTHBOUND " + stops[i].Time + \n; 
+						mapContent += '<table id ="schedule"><tr><th>Direction</th><th>Arrival Time</th></tr>';
+						mapContent += '<tr><td>"NORTHBOUND"' + '</td><td>' + stops[i].Time + '</td></tr>';
+			//			<th>stops[i].Time</th></tr>
+			//			mapContent += " NORTHBOUND " + stops[i].Time; 
 					
 					}
 					if(object.keySouth == stops[i].PlatformKey) {
-						mapContent += "SOUTHBOUND " + stops[i].Time + \n;
+						mapContent += "SOUTHBOUND " + stops[i].Time;
 					}
 				}
 				infowindow.setContent(mapContent);
