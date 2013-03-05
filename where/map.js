@@ -289,8 +289,8 @@ function renderRedLine()
 	redStations.push(davis);
 	markers.push(new google.maps.Marker({position: davis, title: "Davis Station", 
 	keyNorth: "RDAVN", keySouth: "RDAVS", icon: image})); 
-/*	
-	porter = new google.maps.LatLng(42.39674,-71.121815); 
+	
+	porter = new google.maps.LatLng(42.3882,-71.119149); 
 	redStations.push(porter); 
 	markers.push(new google.maps.Marker({position: porter, title: "Porter Station", 
 	keyNorth: "RPORN", keySouth: "RPORS", icon: image}));
@@ -437,7 +437,7 @@ for (var m in markers) {
 					
 				}
 				if(object.keySouth == stops[i].PlatformKey) {
-					content += "SOUTHBOUND " + stops[i].TimeRemaining;
+					mapContent += "SOUTHBOUND " + stops[i].TimeRemaining;
 					console.log(content);
 				}
 				i++;
@@ -453,7 +453,7 @@ for (var m in markers) {
 //					makeData(stops, markers[m]);
 					}
 			}			
-			infowindow.setContent(mapContent);
+			infowindow.setContent("<p>Test</p>");
 			infowindow.open(map, object);
 			}); 
 		}
