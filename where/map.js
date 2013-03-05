@@ -444,6 +444,9 @@ for (var m in markers) {
 						console.log(mapContent);
 					}
 				}
+				infowindow.setContent(mapContent);
+				console.log(mapContent);
+				infowindow.open(map, object); 
 			}
 			request.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
 			request.send(null);
@@ -456,10 +459,10 @@ for (var m in markers) {
 //					makeData(stops, markers[m]);
 					}
 			}			
-			infowindow.setContent("<p>Test</p>");
+/*			infowindow.setContent("<p>Test</p>");
 			console.log("endcontent"); 
 			console.log(mapContent); 
-			infowindow.open(map, object);
+			infowindow.open(map, object);*/ 
 			}); 
 		}
 
