@@ -391,7 +391,7 @@ function renderRedLine()
 	braintree = new google.maps.LatLng(42.2078543, -71.001139); 
 	redBraintree.push(braintree); 
 	markers.push(new google.maps.Marker ({position: braintree,title: "Braintree Station",
-	keyNorth: "", keySouth: "RBRAS", icon: image }));*/
+	keyNorth: "", keySouth: "RBRAS", icon: image }));
 
 //polyline	
 redLine = new google.maps.Polyline({
