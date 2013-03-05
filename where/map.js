@@ -97,6 +97,8 @@ function placeMe() {
 //	console.log("In place me " );
 //	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	distR = findClosestStop(); 
+	console.log("distR");
+	console.log(distR); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
 	if(distR > 5) {
@@ -169,7 +171,6 @@ function findThem(locations)
 		}
 	} 
 	loadMarkers();  
-	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	ShowDistances();
  
 }
@@ -195,7 +196,6 @@ function loadMarkers()
 		scaledSize: new google.maps.Size(25,25)
 		};
 
-	console.log(WaldoLat, WaldoLng, CarmenLat, CarmenLng); 
 	Waldo = new google.maps.LatLng(WaldoLat, WaldoLng);
 	WaldoMarker = new google.maps.Marker ({position: Waldo, title: "Here's Waldo!", icon: waldo }); 
 	WaldoMarker.setMap(map);
@@ -265,6 +265,8 @@ function findClosestStop()
 			stationName = markers[i].title;
 		} 
 	}
+	console.log("in closest");
+	console.log(closest); 
 	allInfo.closest = closest;
 	allInfo.stationName = stationName;
 	return allInfo; 
@@ -419,19 +421,12 @@ redBraintreeBranch = new google.maps.Polyline({
  
 //markers 	
 for (var m in markers) {
-//	console.log(markers[m]); 
-//	console.log(markers[m].title); 
 	markers[m].setMap(map);
 	google.maps.event.addListener(markers[m], 'click', function() {
-		//	console.log(this.title); 
 			object = this;
 			mapContent = this.title;
 			mapContent += '<table id ="schedule"><tr><th>Direction</th><th>Arrival Time</th></tr>';
-		//	var content = this.title; 
-		//	console.log(this.title); 
-			//object = this;
 			function useData(stops) {
-//				console.log(object.keyNorth); 
 				for(i=0;i<stops.length;i++) {
 					if(object.keyNorth == stops[i].PlatformKey) {
 						mapContent += '<tr><td>"NORTHBOUND"' + '</td><td>' + stops[i].Time + '</td></tr>';
@@ -450,17 +445,10 @@ for (var m in markers) {
 					str = this.responseText; 
 					stops = JSON.parse(str);
 					useData(stops);
-//					console.log(markers[m].title); 
-//					makeData(stops, markers[m]);
 					}
 			}			
-/*			infowindow.setContent("<p>Test</p>");
-			console.log("endcontent"); 
-			console.log(mapContent); 
-			infowindow.open(map, object);*/ 
 			}); 
 		}
-
 }
 
 
