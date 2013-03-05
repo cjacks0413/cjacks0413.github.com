@@ -289,7 +289,7 @@ function renderRedLine()
 	redStations.push(davis);
 	markers.push(new google.maps.Marker({position: davis, title: "Davis Station", 
 	keyNorth: "RDAVN", keySouth: "RDAVS", icon: image})); 
-	
+/*	
 	porter = new google.maps.LatLng(42.39674,-71.121815); 
 	redStations.push(porter); 
 	markers.push(new google.maps.Marker({position: porter, title: "Porter Station", 
@@ -391,7 +391,7 @@ function renderRedLine()
 	braintree = new google.maps.LatLng(42.2078543, -71.001139); 
 	redBraintree.push(braintree); 
 	markers.push(new google.maps.Marker ({position: braintree,title: "Braintree Station",
-	keyNorth: "", keySouth: "RBRAS", icon: image }));
+	keyNorth: "", keySouth: "RBRAS", icon: image }));*/
 
 //polyline	
 redLine = new google.maps.Polyline({
