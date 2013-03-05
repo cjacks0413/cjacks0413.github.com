@@ -433,19 +433,14 @@ for (var m in markers) {
 //				console.log(object.keyNorth); 
 				for(i=0;i<stops.length;i++) {
 					if(object.keyNorth == stops[i].PlatformKey) {
-						mapContent += " NORTHBOUND " + stops[i].TimeRemaining;
-						console.log("keynorth");
-						console.log(mapContent);
+						mapContent += " NORTHBOUND " + stops[i].Time; 
 					
 					}
 					if(object.keySouth == stops[i].PlatformKey) {
-						mapContent += "SOUTHBOUND " + stops[i].TimeRemaining;
-						console.log("keysouth");
-						console.log(mapContent);
+						mapContent += "SOUTHBOUND " + stops[i].Time;
 					}
 				}
 				infowindow.setContent(mapContent);
-				console.log(mapContent);
 				infowindow.open(map, object); 
 			}
 			request.open("GET", "http://mbtamap-cedar.herokuapp.com/mapper/redline.json", true);
