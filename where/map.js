@@ -259,6 +259,7 @@ function findClosestStop()
 	var stationName; 
 	var allInfo = {closest: 5, stationName: ""}; 
 	for(i=0;i<markers.length;i++){
+		console.log(myLat,myLng, markers[i].position.hb,markers[i].position.ib); 
 		curr = getDistanceFromPoint(myLat,myLng,markers[i].position.hb,markers[i].position.ib);
 		console.log(curr); 
 		if(curr < closest) {
