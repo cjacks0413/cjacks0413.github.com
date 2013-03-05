@@ -433,12 +433,12 @@ for (var m in markers) {
 				console.log(object.keyNorth); 
 				if(object.keyNorth == stops[i].PlatformKey) {
 					mapContent += " NORTHBOUND " + stops[i].TimeRemaining;
-					console.log(content);
+					console.log(mapContent);
 					
 				}
 				if(object.keySouth == stops[i].PlatformKey) {
 					mapContent += "SOUTHBOUND " + stops[i].TimeRemaining;
-					console.log(content);
+					console.log(mapContent);
 				}
 				i++;
 			}
@@ -454,6 +454,7 @@ for (var m in markers) {
 					}
 			}			
 			infowindow.setContent("<p>Test</p>");
+			console.log(mapContent); 
 			infowindow.open(map, object);
 			}); 
 		}
