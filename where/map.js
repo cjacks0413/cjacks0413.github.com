@@ -108,8 +108,6 @@ function placeMe() {
 
 function renderMap() 
 {
-//	curLocation = new google.maps.LatLng(myLat, myLng);
-//	map.panTo(me);
 	renderRedLine();
 	findCarmenAndWaldo();
 
@@ -206,8 +204,6 @@ function callback2()
 }
 function getDistanceFromPoint(myLat, myLng, lat2, lng2)
 {
-	console.log("in get distance from point "); 
-	console.log(myLat, myLng, lat2, lng2); 
 	var R = 3961;
 	var dLat = deg2rad(lat2 - myLat);
 	var dLon = deg2rad(lng2 - myLng);
@@ -217,8 +213,6 @@ function getDistanceFromPoint(myLat, myLng, lat2, lng2)
 		Math.sin(dLon/2) * Math.sin(dLon/2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 	var distance = R * c;
-	console.log("distance "); 
-	console.log(distance); 
 	return distance; 
 }	
 
