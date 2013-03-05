@@ -88,8 +88,6 @@ function placeMe() {
 	map.panTo(me); 
 //	renderMap(); 
 	distR = findClosestStop(); 
-	console.log("distR");
-	console.log(distR); 
 	//set up content
 	content = meMarker.title + myLat + ", " + myLng + "! ";
 	if(distR > 5) {
