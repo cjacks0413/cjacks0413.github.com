@@ -435,12 +435,9 @@ for (var m in markers) {
 				for(i=0;i<stops.length;i++) {
 					if(object.keyNorth == stops[i].PlatformKey) {
 						mapContent += '<tr><td>"NORTHBOUND"' + '</td><td>' + stops[i].Time + '</td></tr>';
-			//			<th>stops[i].Time</th></tr>
-			//			mapContent += " NORTHBOUND " + stops[i].Time; 
-					
 					}
 					if(object.keySouth == stops[i].PlatformKey) {
-						mapContent += "SOUTHBOUND " + stops[i].Time;
+						mapContent += '<tr><td>"SOUTHBOUND"' + '</td><td>' + stops[i].Time + '</td></tr>';
 					}
 				}
 				infowindow.setContent(mapContent);
