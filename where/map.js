@@ -85,6 +85,7 @@ function placeMe() {
 	title: "You are here: " 
 	}); 
 	meMarker.setMap(map); 
+	map.panTo(me); 
 //	renderMap(); 
 	distR = findClosestStop(); 
 	console.log("distR");
@@ -107,8 +108,8 @@ function placeMe() {
 
 function renderMap() 
 {
-	curLocation = new google.maps.LatLng(myLat, myLng);
-	map.panTo(me);
+//	curLocation = new google.maps.LatLng(myLat, myLng);
+//	map.panTo(me);
 	renderRedLine();
 	findCarmenAndWaldo();
 
