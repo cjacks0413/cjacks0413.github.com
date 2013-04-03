@@ -1,0 +1,14 @@
+.bundle
+
+log/*
+tmp/*
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-v100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db 
+*~
