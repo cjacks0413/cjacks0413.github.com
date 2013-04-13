@@ -209,19 +209,21 @@ function start_game()
 	 }
 	 time = new Date(); 
 	
-/*	request.open("GET", "http://messagehub.herokuapp.com/lab8.json", true);
+	request.open("GET", "http://rocky-refuge-4083.herokuapp.com/highscores.json?game_title=frogger", true);
 	request.send(null);
 	request.onreadystatechange = callback;
 
 	function callback() {
 		if(request.readyState == 4 && request.status == 200) {
-		try {
-			str = request.responseText;
-			console.log(str); 
-		}
-		catch(error) {
-			alert(request.status);
-		}*/ 
+			try {
+				str = request.responseText;
+				console.log(str); 
+			}
+			catch(error) {
+				alert(request.status);
+			}
+		}	
+	}
 	 intervalId = window.setInterval(draw_game, 30);
 	 window.addEventListener('keydown', whatKey, true);  	 
 }
