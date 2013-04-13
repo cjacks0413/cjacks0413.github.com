@@ -426,7 +426,7 @@ function render_footer()
 		alert(entry); 
 		if(entry != "") {
 			jQuery.ajax({
-				url: "rocky-refuge-4083.herokuapp.com/submit.json",
+				url: "http://rocky-refuge-4083.herokuapp.com/submit.json",
 				type: "POST",
 				data: {game_title:"frogger", username: entry, score:"500"},
 				dataType: "json",
