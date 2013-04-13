@@ -424,10 +424,12 @@ function render_footer()
 		window.clearInterval(intervalId); 	
 		entry = window.prompt("Please enter your username!", "username");
 		if(entry != "") {
+			var obj1 = {"game_title" : "frogger", "username": entry, "score" : "500"};
 			jQuery.ajax({
-				url: "http://rocky-refuge-4083.herokuapp.com/submit.json",
+//				url: "http://rocky-refuge-4083.herokuapp.com/submit.json",
+				url: "http://localhost:5000/submit.json", 
 				type: "POST",
-				data: {game_title:"frogger", username: entry, score:"500"},
+				data: JSON.stringify(obj1), 
 				dataType: "json",
 				crossDomain: true, 
 				beforeSend: function(x) {
