@@ -426,10 +426,11 @@ function render_footer()
 		if(entry != "") {
 			var obj1 = {"game_title" : "frogger", "username": entry, "score" : "500"};
 			jQuery.ajax({
-//				url: "http://rocky-refuge-4083.herokuapp.com/submit.json",
-				url: "http://localhost:5000/submit.json", 
+				url: "http://rocky-refuge-4083.herokuapp.com/submit.json",
+//				url: "http://localhost:5000/submit.json", 
 				type: "POST",
-				data: JSON.stringify(obj1), 
+//				data: JSON.stringify(obj1), 
+				data: obj1, 
 				dataType: "json",
 				crossDomain: true, 
 				beforeSend: function(x) {
