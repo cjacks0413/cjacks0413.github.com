@@ -438,8 +438,7 @@ function render_footer()
 				success: function(result) {
 					alert("successfully posted");
 				}
-			}); 
-			 
+			}); 			 
 		}
 	}
 }
