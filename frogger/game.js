@@ -1,3 +1,5 @@
+var request = new XMLHttpRequest(); 
+
 //get sprite image 
 sprite = new Image();
 sprite.src = "assets/frogger_sprites.png"; 
@@ -206,6 +208,20 @@ function start_game()
 	 	alert ('Your browser does not support canvas.');
 	 }
 	 time = new Date(); 
+	
+/*	request.open("GET", "http://messagehub.herokuapp.com/lab8.json", true);
+	request.send(null);
+	request.onreadystatechange = callback;
+
+	function callback() {
+		if(request.readyState == 4 && request.status == 200) {
+		try {
+			str = request.responseText;
+			console.log(str); 
+		}
+		catch(error) {
+			alert(request.status);
+		}*/ 
 	 intervalId = window.setInterval(draw_game, 30);
 	 window.addEventListener('keydown', whatKey, true);  	 
 }
@@ -407,8 +423,23 @@ function render_footer()
 		ctx.fillText("GAME IS OVER :( ", 40, 300);
 		window.clearInterval(intervalId); 	
 		entry = window.prompt("Please enter your username!", "username");
+		alert(entry); 
 		if(entry != "") {
-			console.log("ok, we'll have a fnc here"); 
+			jQuery.ajax({
+				url: "rocky-refuge-4083.herokuapp.com/submit.json",
+				type: "POST",
+				data: {game_title:"frogger", username: entry, score:"500"},
+				dataType: "json",
+				beforeSend: function(x) {
+					if(x && x.overrideMimeType) {
+						x.overrideMimeType("application/json;charset=UTF-8");
+					}
+				},
+				success: function(result) {
+					alert("successfully posted");
+				}
+			}); 
+			 
 		}
 	}
 }
