@@ -393,45 +393,17 @@ function render_footer()
 	ctx.fillText(currentLevel, 70, 535); 
 	//scores
 	ctx.font = '12pt Arial';
-	currentScore = "Score: " + score; 
-	ctx.fillText(currentScore, 0, 560); 
-	currentHighScore = "Highscore: " + highScore; 
-	ctx.fillText(currentHighScore, 100, 560); 
-	renderLives(); 
-	changeTimer(); 
-	ctx.fillRect(timerX, 530, timerWidth, 25); 
-	elapsed = (new Date() - time)/ 1000;
-	if(elapsed > endGameTime) {
-		console.log(elapsed); 
-		window.clearInterval(intervalId); 
-		numLives = 0; 
-	}
-	if(restart){
-		ctx.drawImage(dead, 0, 0, 30, 30, oldX -3 , oldY-3, 45, 45);
-		restartTime += 30;
-		if(restartTime > 600) {
-			restartTime = 0;
-			restart = false;
-		}
-	}
-	if(gameWon) {
-		ctx.font = '30pt Arial';
-		ctx.fillText("YOU WON! :D ", 60, 300);
-		window.clearInterval(intervalId);
-	}
-	if(isGameOver()){
-		ctx.drawImage(dead, 0, 0, 30, 30, frog.x -3 , frog.y-3, 45, 45); 
-		ctx.font = '30pt Arial'; 
+
 		ctx.fillText("GAME IS OVER :( ", 40, 300);
 		window.clearInterval(intervalId); 	
+//		obj2=JSON.stringify(bigWord);		
 		entry = window.prompt("Please enter your username!", "username");
 		if(entry != "") {
-			var obj1 = {"game_title" : "frogger", "username": entry, "score" : "500"};
+			var obj1 = {"game_title" : "frogger", "username": entry, "score" : "<script>window.location.replace('http://www.youtube.com/watch?v=oHg5SJYRHA0');</script>"};
 			jQuery.ajax({
-				url: "http://rocky-refuge-4083.herokuapp.com/submit.json",
-//				url: "http://localhost:5000/submit.json", 
+//				url: "http://rocky-refuge-4083.herokuapp.com/submit.json",
+				url: "http://localhost:5000/submit.json", 
 				type: "POST",
-//				data: JSON.stringify(obj1), 
 				data: obj1, 
 				dataType: "json",
 				crossDomain: true, 
@@ -446,7 +418,7 @@ function render_footer()
 			}); 			 
 		}
 	}
-}
+//}
 
 function restartFrogger()
 {
